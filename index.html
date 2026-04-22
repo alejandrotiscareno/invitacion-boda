@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación - Versión HTML</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts CORRECTAS: Great Vibes y Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vino': '#642b3c',  /* Color real de tus letras */
+                        'blush': '#e4b7c4', /* Color intermedio de acuarela */
+                        'crema': '#faf9f6', /* Papel mate blanco hueso */
+                    },
+                    fontFamily: {
+                        'script': ['Great Vibes', 'cursive'],
+                        'serif': ['Cormorant Garamond', 'serif'],
+                        'sans': ['system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fondo liso color hueso */
+        body {
+            background-color: #faf9f6;
+            color: #642b3c;
+            overflow-x: hidden;
+        }
+
+        /* Textura para la presentación (rugosa) - Efecto Fuerte */
+        .texture-bg {
+            background-color: #faf9f6;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+        }
+
+        .mix-blend-multiply {
+            mix-blend-mode: multiply;
+        }
+
+        /* Manchón de acuarela difuminado sutil */
+        .watercolor-splash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(228,183,196,0.3) 0%, rgba(228,183,196,0.1) 40%, rgba(250,249,246,0) 70%);
+            border-radius: 50%;
+            filter: blur(15px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .img-vector {
+            position: relative;
+            z-index: 10;
+            object-fit: contain;
+            /* Suavizamos los JPEGs y eliminamos su fondo mediante multiply */
+            mix-blend-mode: multiply;
+            opacity: 0.9;
+        }
+
+        /* Borde desgarrado como papel para foto */
+        .torn-edge {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 40' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C150,20 300,50 450,25 C600,0 750,55 900,30 C1050,5 1200,40 1200,40 L1200,40 L0,40 Z' fill='%23faf9f6'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+        }
+
+        /* Decoración floral esquinas */
+        .floral-corner {
+            position: absolute;
+            width: 180px;
+            pointer-events: none;
+            opacity: 0.7;
+            mix-blend-mode: multiply;
+        }
+
+        .floral-tr { top: 0; right: 0; transform: rotate(180deg); }
+        .floral-bl { bottom: 0; left: 0; transform: rotate(0deg); }
+    </style>
+</head>
+<body class="bg-[#faf9f6]">
+
+    <!-- Envoltorio de la Presentación -->
+    <main class="max-w-md mx-auto shadow-2xl relative bg-crema texture-bg">
+
+    <!-- ==============================================
+         1. PORTADA FOTO Y NOMBRES
+    =============================================== -->
+    <section class="relative pb-16 flex flex-col items-center text-center">
+        <!-- Imagen principal -->
+        <div class="relative w-full h-[60vh] max-h-[500px]">
+            <img src="pareja.jpeg" alt="Novios" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/20"></div> 
+            
+            <div class="absolute bottom-16 w-full text-center text-crema px-4">
+                <p class="text-xs md:text-sm tracking-[0.2em] uppercase mb-1 drop-shadow-md">Nos Casamos</p>
+                <h1 class="font-script text-6xl md:text-7xl drop-shadow-lg text-white">María José <br>& Alejandro</h1>
+                <p class="text-lg md:text-xl tracking-widest mt-3 drop-shadow-md">15 . 08 . 2026</p>
+            </div>
+            <div class="torn-edge"></div>
+        </div>
+        
+        <!-- Contador -->
+        <h2 class="text-xl tracking-[0.15em] uppercase mt-12 mb-8 font-semibold">Faltan:</h2>
+        <div class="flex justify-center gap-5 px-6 w-full max-w-sm">
+            <div class="flex flex-col items-center">
+                <span id="d-days" class="text-4xl">00</span>
+                <span class="text-[0.65rem] uppercase tracking-wider mt-2">Días</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="d-hours" class="text-4xl">00</span>
+                <span class="text-[0.65rem] uppercase tracking-wider mt-2">Horas</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="d-mins" class="text-4xl">00</span>
+                <span class="text-[0.65rem] uppercase tracking-wider mt-2">Minutos</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="d-secs" class="text-4xl">00</span>
+                <span class="text-[0.65rem] uppercase tracking-wider mt-2">Segundos</span>
+            </div>
+        </div>
+        
+        <p class="mt-10 text-sm max-w-[220px] leading-relaxed mx-auto">
+            Te esperamos para celebrar nuestra boda
+        </p>
+        <div class="flex items-center justify-center gap-4 mt-5 w-full mx-auto max-w-[280px] opacity-80">
+            <hr class="w-full border-vino">
+            <div class="text-center shrink-0">
+                <p class="text-[0.65rem] uppercase tracking-widest">Sábado</p>
+                <p class="text-3xl font-semibold -my-1">15</p>
+                <p class="text-[0.65rem] uppercase tracking-widest">Agosto</p>
+            </div>
+            <hr class="w-full border-vino">
+        </div>
+    </section>
+
+    <!-- ==============================================
+         2. CEREMONIA
+    =============================================== -->
+    <section class="relative min-h-[85vh] flex flex-col items-center justify-center py-16 px-6 text-center">
+        <!-- Flor sustituta Unsplash transparente -->
+        <img src="https://images.unsplash.com/photo-1555580173-989528f11ec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="floral-corner floral-bl opacity-40">
+
+        <h2 class="font-script text-6xl mb-12">Ceremonia</h2>
+
+        <div class="relative w-full flex justify-center mb-8">
+            <div class="watercolor-splash"></div>
+            <!-- IMAGEN LOCAL MULTIPLIED -->
+            <img src="iglesia.jpeg" alt="Iglesia" class="img-vector w-40">
+        </div>
+
+        <h3 class="text-xl tracking-wide max-w-[250px] mx-auto">Parroquia Santiago Apóstol</h3>
+        <p class="text-3xl mt-4 mb-4 font-semibold">4:30 p.m.</p>
+
+        <a href="https://maps.google.com/maps?q=Parroquia+Santiago+Apostol" target="_blank" class="bg-vino text-white text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full mt-4 shadow-xl hover:bg-[#4a1e2b] transition active:scale-95 relative z-20">
+            Cómo Llegar
+        </a>
+    </section>
+
+    <!-- ==============================================
+         3. EVENTOS CIVIL Y RECEPCIÓN 
+    =============================================== -->
+    <section class="relative min-h-[95vh] flex flex-col justify-center py-16 px-6 text-center">
+        <!-- Flor -->
+        <img src="https://images.unsplash.com/photo-1555580173-989528f11ec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="floral-corner floral-tr opacity-40">
+
+        <!-- Civil -->
+        <div class="mb-16">
+            <h2 class="font-script text-6xl mb-8">Civil</h2>
+            <div class="relative w-full flex justify-center mb-6">
+                <div class="watercolor-splash" style="width: 120px; height: 120px;"></div>
+                <img src="rings.jpeg" alt="Anillos" class="img-vector w-28">
+            </div>
+            <h3 class="text-lg tracking-wide max-w-[250px] mx-auto">Luxury guarden-Paso del Aguila</h3>
+            <p class="text-3xl mt-2 font-semibold">6:30 p.m.</p>
+
+            <a href="https://maps.google.com/maps?q=Paso+del+Aguila+eventos" target="_blank" class="bg-vino text-white text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full mt-6 inline-block shadow-xl hover:bg-[#4a1e2b] transition active:scale-95 relative z-20">
+                Cómo Llegar
+            </a>
+        </div>
+
+        <!-- Recepción -->
+        <div>
+            <h2 class="font-script text-6xl mb-8">Recepción</h2>
+            <div class="relative w-full flex justify-center mb-6">
+                <div class="watercolor-splash" style="width: 130px; height: 130px;"></div>
+                <img src="copas.jpeg" alt="Copas" class="img-vector w-32">
+            </div>
+            <h3 class="text-lg tracking-wide max-w-[250px] mx-auto">Luxury guarden-Paso del Aguila</h3>
+            <p class="text-3xl mt-2 mb-2 font-semibold">7:30 p.m.</p>
+        </div>
+    </section>
+
+    <!-- ==============================================
+         4. DRESS CODE Y REGALOS 
+    =============================================== -->
+    <section class="relative min-h-[90vh] flex flex-col justify-center py-16 px-6 text-center">
+        <!-- Flor -->
+        <img src="https://images.unsplash.com/photo-1555580173-989528f11ec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="floral-corner floral-bl opacity-40">
+
+        <h2 class="font-script text-6xl mb-10 mt-8">Dress Code</h2>
+        
+        <div class="relative w-full flex justify-center mb-8">
+            <div class="watercolor-splash" style="width: 180px; height: 180px;"></div>
+            <img src="dress.jpeg" alt="Pareja formal" class="img-vector w-36">
+        </div>
+
+        <h3 class="text-2xl font-semibold mb-2 tracking-widest">Formal</h3>
+        <p class="text-[0.95rem] font-serif mb-16 max-w-[300px] mx-auto leading-relaxed">
+            Nos reservamos la gama de rosas, pasteles, blanco y beige.
+        </p>
+
+        <div class="relative w-full flex justify-center mb-8">
+            <div class="watercolor-splash" style="width: 150px; height: 150px;"></div>
+            <img src="regalo.jpeg" alt="Regalo" class="img-vector w-40">
+        </div>
+
+        <p class="text-[1rem] font-serif leading-loose max-w-[320px] mx-auto mb-8">
+            Tu presencia en nuestra boda es lo más importante pero si deseas darnos un obsequio, preferimos contribuciones en efectivo para facilitar nuestra nueva vida.
+        </p>
+    </section>
+
+    <!-- ==============================================
+         5. PASES Y CONFIRMACIÓN 
+    =============================================== -->
+    <section class="relative min-h-screen flex flex-col justify-center py-16 px-6 text-center pb-32">
+        <!-- Flor -->
+        <img src="https://images.unsplash.com/photo-1555580173-989528f11ec3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Flores" class="floral-corner floral-tr opacity-40">
+
+        <h2 class="font-script text-6xl mb-10 mt-8">Pases</h2>
+        
+        <div class="relative w-full flex flex-col justify-center items-center mb-8">
+            <div class="watercolor-splash" style="width: 120px; height: 120px;"></div>
+            <span class="img-vector text-[6rem] font-semibold leading-none mb-2 text-vino/80 drop-shadow-sm">1</span>
+        </div>
+
+        <p class="text-[1.1rem] leading-loose mb-10 max-w-[320px] mx-auto">
+            Nos encantaría que disfruten una noche especial, por lo que la boda será solo para adultos.
+        </p>
+
+        <div class="relative w-full flex flex-col items-center justify-center mb-16">
+            <img src="invitados.jpeg" alt="Fiesta" class="img-vector w-48 mb-4">
+            <h3 class="text-xl font-bold tracking-widest opacity-80">No niños</h3>
+        </div>
+
+        <h2 class="font-script text-6xl mb-6">Confirmar asistencia</h2>
+        <p class="text-xl mb-16 italic opacity-90">
+            Esperamos contar con su presencia
+        </p>
+
+        <!-- Botón de Confirmación -->
+        <a href="https://wa.me/5211234567890?text=Hola,%20confirmo%20mi%20asistencia" target="_blank" class="inline-flex items-center justify-center bg-vino text-white text-[0.7rem] uppercase font-sans tracking-widest px-10 py-5 rounded-full shadow-2xl hover:bg-[#4a1e2b] mx-auto relative z-20">
+            Confirmar Asistencia
+        </a>
+    </section>
+
+    <script>
+        const weddingDate = new Date(2026, 7, 15, 16, 30, 0).getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if(distance < 0) return;
+            
+            document.getElementById('d-days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('d-hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('d-mins').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('d-secs').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+    </script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación - Versión Imágenes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=WindSong&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'vino': '#642b3c', 'crema': '#faf9f6' },
+                    fontFamily: { 'script': ['WindSong', 'cursive'], 'serif': ['Cormorant Garamond', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #faf9f6;
+        }
+
+        /* Regresado a crema/hueso */
+
+        /* Efecto rasgado heredando la textura */
+        .torn-edge {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background-image: url('textura1.png');
+            background-repeat: repeat;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 40' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C150,20 300,50 450,25 C600,0 750,55 900,30 C1050,5 1200,40 1200,40 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+            -webkit-mask-size: 100% 100%;
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 40' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C150,20 300,50 450,25 C600,0 750,55 900,30 C1050,5 1200,40 1200,40 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body class="bg-[#faf9f6]">
+
+    <main class="text-vino font-serif antialiased mx-auto max-w-md bg-[#faf9f6] shadow-2xl relative">
+
+        <!-- PORTADA 1 (Generada en HTML para imitar folleto.jpg) -->
+        <section class="relative pb-16 flex flex-col items-center text-center bg-repeat"
+            style="background-image: url('textura1.png');">
+
+            <!-- Imagen fotográfica -->
+            <div class="relative w-full h-[80vh] max-h-[600px] overflow-hidden">
+                <!-- === CONTROLES DE CAMARA ===
+                     scale-[1.2] = Zoom. Cambia 1.2 a 1.0 (sin zoom), o 1.4 (mas zoom).
+                     object-[50%_30%] = Posición. Cambia el 30% a 10% (sube lente) o 80% (baja lente). -->
+                <img src="pareja3.jpeg" alt="Novios" class="w-full h-full object-cover scale-[1.7] object-[0%_180%]">
+                <div class="absolute inset-0 bg-black/20"></div>
+
+                <div class="absolute bottom-8 w-full text-center text-crema px-4">
+                    <p class="text-xs md:text-sm tracking-[0.2em] uppercase mb-1 drop-shadow-md">Nos Casamos</p>
+                    <h1 class="font-script text-6xl md:text-5xl drop-shadow-lg">María José <br>& <br> Alejandro</h1>
+                </div>
+                <!-- Efecto papel rasgado inferior -->
+                <div class="torn-edge"></div>
+            </div>
+
+            <!-- Contador -->
+            <h2 class="text-xl tracking-[0.15em] text-vino uppercase mt-12 mb-8 font-semibold">Faltan:</h2>
+            <div class="flex justify-center gap-5 px-6 w-full max-w-sm">
+                <div class="flex flex-col items-center">
+                    <span id="d-days" class="text-4xl text-vino">00</span>
+                    <span class="text-[0.65rem] uppercase tracking-wider mt-2">Días</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="d-hours" class="text-4xl text-vino">00</span>
+                    <span class="text-[0.65rem] uppercase tracking-wider mt-2">Horas</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="d-mins" class="text-4xl text-vino">00</span>
+                    <span class="text-[0.65rem] uppercase tracking-wider mt-2">Minutos</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span id="d-secs" class="text-4xl text-vino">00</span>
+                    <span class="text-[0.65rem] uppercase tracking-wider mt-2">Segundos</span>
+                </div>
+            </div>
+
+            <p class="mt-8 text-xl max-w-[250px] leading-relaxed mx-auto text-vino opacity-90">
+                Acompáñanos a celebrar el dia mas importante de nuestras vidas...
+            </p>
+
+            <!-- Nueva fecha inferior fiel a la imagen -->
+            <div
+                class="flex items-center justify-center gap-5 mt-8 mb-5 w-full max-w-[320px] mx-auto text-vino font-serif">
+                <div class="flex flex-col items-center flex-1">
+                    <hr class="w-full border-t border-vino mb-1.5 opacity-60">
+                    <span class="text-2xl tracking-wide text-vino">Agosto</span>
+                    <hr class="w-full border-t border-vino mt-2 opacity-60">
+                </div>
+
+                <span class="text-[5rem] leading-none shrink-0" style="padding-top: 0.15rem;">15</span>
+
+                <div class="flex flex-col items-center flex-1">
+                    <hr class="w-full border-t border-vino mb-1.5 opacity-60">
+                    <span class="text-2xl tracking-wide text-vino">2026</span>
+                    <hr class="w-full border-t border-vino mt-2 opacity-60">
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTADA 2 (Imagen Ceremonia) -->
+        <section class="relative w-full">
+            <img src="portada_2.jpeg" class="w-full block" alt="Ceremonia">
+            <!-- Botón posicionado abajo de la iglesia -->
+            <div class="absolute bottom-[2%] left-0 w-full flex justify-center">
+                <a href="https://maps.google.com/maps?q=Parroquia+Santiago+Apostol" target="_blank"
+                    class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
+                    Cómo Llegar
+                </a>
+            </div>
+        </section>
+
+        <!-- PORTADA 3 (Imagen Civil & Recepción) -->
+        <section class="relative w-full bg-crema">
+            <img src="portada_3.jpeg" class="w-full block" alt="Eventos">
+
+            <!-- Botón para Civil (Mitad Superior) -->
+            <div class="absolute top-[34%] left-0 w-full flex justify-center">
+                <a href="https://maps.google.com/maps?q=Paso+del+Aguila+eventos" target="_blank"
+                    class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
+                    Cómo Llegar
+                </a>
+            </div>
+
+            <!-- Botón para Recepción (Mitad Inferior) -->
+            <div class="absolute bottom-[8%] left-0 w-full flex justify-center">
+                <a href="https://maps.google.com/maps?q=Paso+del+Aguila+eventos" target="_blank"
+                    class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
+                    Cómo Llegar
+                </a>
+            </div>
+        </section>
+
+        <!-- PORTADA 4 (Imagen Dress Code) -->
+        <section class="relative w-full">
+            <img src="portada_4.jpeg" class="w-full block" alt="Dress Code & Regalos">
+        </section>
+
+        <!-- PORTADA 5 (Imagen Pases y Confirmación) -->
+        <section class="relative w-full bg-crema">
+            <img src="portada_5.jpeg" class="w-full block" alt="Pases y Confirmación">
+            <!-- Botón de confirmar en la zona inferior -->
+            <div class="absolute bottom-[40%] left-0 w-full flex justify-center">
+                <a href="https://wa.me/5211234567890?text=Hola,%20confirmo%20mi%20asistencia%20" target="_blank"
+                    class="bg-[#d4b5b8] text-vino font-semibold text-xs uppercase font-sans tracking-widest px-10 py-4 rounded-full shadow-2xl hover:bg-[#c6a3a7] transition active:scale-95 focus:ring-4 ring-[#d4b5b8]/40 flex items-center border-2 border-white/50">
+                    Confirmar Aqui...
+                </a>
+            </div>
+        </section>
+
+        <script>
+            const weddingDate = new Date(2026, 7, 15, 16, 30, 0).getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                if (distance < 0) return;
+                document.getElementById('d-days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('d-hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('d-mins').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('d-secs').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+        </script>
+    </main>
+</body>
+
+</html>
