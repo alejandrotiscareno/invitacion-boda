@@ -191,10 +191,16 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             // Obtenemos el parámetro ?codigo= del link
-            const codigo = urlParams.get('codigo');
+            let codigo = urlParams.get('codigo');
+            
+            // Si no hay parámetro, revisamos si viene como "hash" (ej. #X7M2)
+            // Esto evita que WhatsApp rompa la previsualización
+            if (!codigo && window.location.hash) {
+                codigo = window.location.hash.substring(1);
+            }
 
             // Si el código que ingresan es válido, asignamos los pases.
-            // Si no hay código o es inventado, ponemos 2 por defecto.
+            // Si no hay código o es inventado, ponemos 1 por defecto.
             const pases = codigosSecretos[codigo] ? codigosSecretos[codigo] : 1;
 
             const pasesElement = document.getElementById('pases-number');
