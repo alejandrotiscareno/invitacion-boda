@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <p class="mt-8 text-xl max-w-[250px] leading-relaxed mx-auto text-vino opacity-90">
+            <p class="mt-8 text-xl max-w-[250px] leading-relaxed mx-auto text-vino ">
                 Acompáñanos a celebrar el dia mas importante de nuestras vidas...
             </p>
 
@@ -101,7 +101,7 @@
                     <hr class="w-full border-t border-vino mt-2 opacity-60">
                 </div>
 
-                <span class="text-[5rem] leading-none shrink-0" style="padding-top: 0.15rem;">15</span>
+                <span class="text-[6rem] leading-none shrink-0 -translate-y-4">15</span>
 
                 <div class="flex flex-col items-center flex-1">
                     <hr class="w-full border-t border-vino mb-1.5 opacity-60">
@@ -116,7 +116,7 @@
             <img src="portada_2.jpeg" class="w-full block" alt="Ceremonia">
             <!-- Botón posicionado abajo de la iglesia -->
             <div class="absolute bottom-[2%] left-0 w-full flex justify-center">
-                <a href="https://maps.google.com/maps?q=Parroquia+Santiago+Apostol" target="_blank"
+                <a href="https://maps.app.goo.gl/7ptmUeLS74rLp3Mv7" target="_blank"
                     class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
                     Cómo Llegar
                 </a>
@@ -129,7 +129,7 @@
 
             <!-- Botón para Civil (Mitad Superior) -->
             <div class="absolute top-[34%] left-0 w-full flex justify-center">
-                <a href="https://maps.google.com/maps?q=Paso+del+Aguila+eventos" target="_blank"
+                <a href="https://maps.app.goo.gl/B9XfPVZTPfF3frft7" target="_blank"
                     class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
                     Cómo Llegar
                 </a>
@@ -137,24 +137,30 @@
 
             <!-- Botón para Recepción (Mitad Inferior) -->
             <div class="absolute bottom-[8%] left-0 w-full flex justify-center">
-                <a href="https://maps.google.com/maps?q=Paso+del+Aguila+eventos" target="_blank"
+                <a href="https://maps.app.goo.gl/B9XfPVZTPfF3frft7" target="_blank"
                     class="bg-[#d4b5b8] text-vino font-semibold text-[0.65rem] uppercase font-sans tracking-widest px-8 py-3 rounded-full shadow-xl hover:bg-[#c6a3a7] transition active:scale-95 border-2 border-white/50">
                     Cómo Llegar
                 </a>
             </div>
         </section>
 
-        <!-- PORTADA 4 (Imagen Dress Code) -->
+        <!-- PORTADA 4 (Imagen Dress Code & Pases) -->
         <section class="relative w-full">
-            <img src="portada_4.jpeg" class="w-full block" alt="Dress Code & Regalos">
+            <img src="portada_4.png" class="w-full block" alt="Dress Code & Pases">
+            <!-- Texto dinámico superpuesto para los pases -->
+            <!-- Puedes ajustar el "top-[X%]" para subir o bajar el número según el diseño de tu imagen -->
+            <div class="absolute top-[85%] left-0 w-full flex justify-center pointer-events-none -translate-y-1/2">
+                <span id="pases-number" class="text-[6rem] font-serif text-vino leading-none drop-shadow-md">1</span>
+            </div>
         </section>
 
-        <!-- PORTADA 5 (Imagen Pases y Confirmación) -->
+        <!-- PORTADA 5 (Imagen Confirmación) -->
         <section class="relative w-full bg-crema">
-            <img src="portada_5.jpeg" class="w-full block" alt="Pases y Confirmación">
+            <img src="portada_5.jpeg" class="w-full block" alt="Confirmación">
             <!-- Botón de confirmar en la zona inferior -->
             <div class="absolute bottom-[40%] left-0 w-full flex justify-center">
-                <a href="https://wa.me/5211234567890?text=Hola,%20confirmo%20mi%20asistencia%20" target="_blank"
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd8wIWUfSU1ARiaNecP8jeeFUGTneijLMh0kL9DBpDuz2Na_Q/viewform"
+                    target="_blank"
                     class="bg-[#d4b5b8] text-vino font-semibold text-xs uppercase font-sans tracking-widest px-10 py-4 rounded-full shadow-2xl hover:bg-[#c6a3a7] transition active:scale-95 focus:ring-4 ring-[#d4b5b8]/40 flex items-center border-2 border-white/50">
                     Confirmar Aqui...
                 </a>
@@ -162,6 +168,35 @@
         </section>
 
         <script>
+            // Lógica para obtener los pases con códigos secretos (?codigo=XYZ)
+            const codigosSecretos = {
+                'X7M2': 1,
+                'V9K4': 2,
+                'B3J8': 3,
+                'Q5R1': 4,
+                'H6W9': 5
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            // Obtenemos el parámetro ?codigo= del link
+            const codigo = urlParams.get('codigo');
+
+            // Si el código que ingresan es válido, asignamos los pases.
+            // Si no hay código o es inventado, ponemos 2 por defecto.
+            const pases = codigosSecretos[codigo] ? codigosSecretos[codigo] : 1;
+
+            const pasesElement = document.getElementById('pases-number');
+            if (pasesElement) {
+                pasesElement.innerText = pases;
+            }
+
+            // Actualizar el botón de WhatsApp con la cantidad de pases correcta
+            const waLink = document.querySelector('a[href*="wa.me"]');
+            if (waLink) {
+                const originalHref = waLink.getAttribute('href');
+                waLink.setAttribute('href', originalHref + 'para%20' + pases + '%20personas.');
+            }
+
             const weddingDate = new Date(2026, 7, 15, 16, 30, 0).getTime();
             setInterval(() => {
                 const now = new Date().getTime();
