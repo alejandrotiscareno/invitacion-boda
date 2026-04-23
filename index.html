@@ -10,7 +10,7 @@
     <meta property="og:title" content="¡Nuestra Boda! - María José & Alejandro">
     <meta property="og:description" content="Acompáñanos a celebrar el día más importante de nuestras vidas.">
     <!-- WhatsApp funciona mejor con etiquetas simples y la URL canónica -->
-    <meta property="og:image" itemprop="image" content="https://majoyalex.webquetzal.com/pareja3.jpeg">
+    <meta property="og:image" itemprop="image" content="https://majoyalex.webquetzal.com/pareja3.jpg">
     <meta property="og:url" content="https://majoyalex.webquetzal.com/">
     <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,38 +61,7 @@
 
             <!-- Imagen fotográfica -->
             <div class="relative w-full h-[80vh] max-h-[600px] overflow-hidden">
-                <!-- === CONTROLES DE CAMARA === -->
-                <img id="hero-image" src="pareja3.jpeg" alt="Novios" class="w-full h-full object-cover scale-[1.7]"
-                    style="object-position: 0% 180%;">
-
-                <script>
-                    // Calculadora matemática para adaptar la posición original (180%) a cualquier pantalla
-                    function adjustHeroImage() {
-                        const heroImg = document.getElementById('hero-image');
-                        if (!heroImg) return;
-
-                        const screenHeight = window.innerHeight;
-                        // Altura promedio donde el 180% se veía perfecto (ej. iPhone 8 / SE / Android estándar)
-                        const baseHeight = 667;
-                        let targetPos = 180;
-
-                        if (screenHeight > baseHeight) {
-                            // Por cada pixel extra de altura de las pantallas modernas, reducimos matemáticamente el porcentaje
-                            // para compensar la deformación que sufre la caja al estirarse.
-                            const diff = screenHeight - baseHeight;
-                            targetPos = 270 - (diff * 0.35); // Ajuste proporcional
-
-                            // Evitamos que baje demasiado
-                            if (targetPos < 50) targetPos = 50;
-                        }
-
-                        heroImg.style.objectPosition = `0% ${targetPos}%`;
-                    }
-
-                    window.addEventListener('resize', adjustHeroImage);
-                    window.addEventListener('DOMContentLoaded', adjustHeroImage);
-                    adjustHeroImage(); // Ejecutar inmediatamente
-                </script>
+                <img id="hero-image" src="pareja3.jpg" alt="Novios" class="w-full h-full object-cover object-center">
                 <div class="absolute inset-0 bg-black/20"></div>
 
                 <div class="absolute bottom-8 w-full text-center text-crema px-4">
